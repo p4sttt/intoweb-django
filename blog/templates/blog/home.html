@@ -1,0 +1,43 @@
+{% extends "blog/base.html" %} {% load static %} {% block content %}
+<div class="feed-grid">
+  <div
+    class="flex py-6 border-r border-neutral-800 flex-col justify-center items-start gap-5 h-fit sticky top-[72px]"
+  >
+    {% for category in categories %}
+    <button
+      class="flex flex-row gap-2 text-md items-center justify-start opacity-60 hover:opacity-90 transition-opacity text-slate-400"
+    >
+      <img
+        src="{{ category.icon }}"
+        alt="{{ category.icon }}"
+        class="w-5 h-5"
+      />
+      {{ category.title }}
+    </button>
+    {% endfor %}
+    <button
+      class="pt-5 flex flex-row gap-2 border-t border-neutral-800 justify-start items-center w-full font-medium text-slate-400 opacity-80 hover:opacity-100"
+    >
+      <img
+        src="{% static 'blog/icons/plus-outline.svg' %}"
+        alt="plus-outline-icon"
+      />
+      Create post
+    </button>
+  </div>
+  <div>
+    <h1 class="text-2xl font-semibold">All recent posts</h1>
+    <div class="flex flex-col gap-2 mt-4">
+      {% for post in posts %}
+      <article
+        class="py-4 px-6 bg-[#212428] rounded-lg flex-col justify-start items-start gap-2 inline-flex"
+      >
+        <h1 class="text-xl font-semibold">{{ post.title }}</h1>
+        <p class="text-sm opacity-50">{{ post.text }}</p>
+        <p class="text-end w-full mt-2 opacity-80">{{ post.author }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

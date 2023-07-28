@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="{% static 'blog/favicon.svg' %}"
+      type="image/x-icon"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'blog/main.css' %}"
+    />
+    {% if title %}
+    <title>{{ title }} - INTOWEB</title>
+    {% else %}
+    <title>INTOWEB</title>
+    {% endif %}
+  </head>
+  <body
+    class="overflow-x-hidden text-neutral-200 bg-neutral-950 w-screen relative"
+  >
+    <!-- HEADER -->
+    <div
+      class="py-6 w-full bg-stone-950 bg-opacity-50 border-b backdrop-blur-lg border-white border-opacity-10 px-4 fixed top-0 z-[999]"
+    >
+      <div
+        class="container max-w-4xl flex flex-row justify-between mx-auto h-full items-end"
+      >
+        <div class="flex flex-row gap-6 items-end">
+          <a
+            href="{% url 'blog/home' %}"
+            class="text-neutral-200 text-xl font-semibold uppercase leading-normal"
+          >
+            !NTOWEB
+          </a>
+          <ul
+            class="flex flex-row gap-3 text-gray-500 text-md font-normal leading-normal trainsition-color"
+          >
+            <a href="{% url 'blog/home' %}" class="hover:text-gray-700">Feed</a>
+            <a href="{% url 'blog/about' %}" class="hover:text-gray-700"
+              >About</a
+            >
+          </ul>
+        </div>
+        <button class="text-gray-300">
+          <p>Log in</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="px-4 pb-8">
+        <div class="container max-w-4xl mx-auto mt-32">
+          {% block content %} {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="w-full py-4">
+      <p class="text-center text-gray-600 text-md font-normal leading-normal">
+        INTOWEB © 2022-2023
+      </p>
+    </div>
+  </body>
+</html>
