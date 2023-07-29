@@ -4,7 +4,8 @@
     class="flex py-6 border-r border-neutral-800 flex-col justify-center items-start gap-5 h-fit sticky top-[72px]"
   >
     {% for category in categories %}
-    <button
+    <a
+      href="{% url 'blog/home' %}?category={{ category.category.name }}"
       class="flex flex-row gap-2 text-md items-center justify-start opacity-60 hover:opacity-90 transition-opacity text-slate-400"
     >
       <img
@@ -13,7 +14,7 @@
         class="w-5 h-5"
       />
       {{ category.title }}
-    </button>
+    </a>
     {% endfor %}
     <button
       class="pt-5 flex flex-row gap-2 border-t border-neutral-800 justify-start items-center w-full font-medium text-slate-400 opacity-80 hover:opacity-100"
@@ -26,7 +27,8 @@
     </button>
   </div>
   <div>
-    <h1 class="text-2xl font-semibold">All recent posts</h1>
+    {% if posts %}
+    <h1 class="text-2xl font-semibold">Recent posts</h1>
     <div class="flex flex-col gap-2 mt-4">
       {% for post in posts %}
       <article
@@ -38,6 +40,12 @@
       </article>
       {% endfor %}
     </div>
+    {% else %}
+    <div class="w-full h-full flex flex-col gap-1 items-center justify-center">
+      <p class="text-md text-center text-neutral-400">~(≧ω≦)~</p>
+      <h1 class="text-2xl font-semibold">Nothing here</h1>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock content %}
