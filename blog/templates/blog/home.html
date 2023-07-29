@@ -1,11 +1,11 @@
 {% extends "blog/base.html" %} {% load static %} {% block content %}
-<div class="feed-grid">
+<div class="feed-grid sm:grid block">
   <div
-    class="flex py-6 border-r border-neutral-800 flex-col justify-center items-start gap-5 h-fit sticky top-[72px]"
+    class="sm:flex py-6 border-r border-neutral-800 flex-col justify-center items-start gap-5 h-fit sticky top-[72px] hidden"
   >
     {% for category in categories %}
     <a
-      href="{% url 'blog/home' %}?category={{ category.category.name }}"
+      href="{% url 'blog/feed' %}?category={{ category.category.name }}"
       class="flex flex-row gap-2 text-md items-center justify-start opacity-60 hover:opacity-90 transition-opacity text-slate-400"
     >
       <img

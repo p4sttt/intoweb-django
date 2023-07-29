@@ -1,10 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.templatetags.static import static
 from .models import Post, Category
 
 
-def home(request):
+def feed(request):
     categories = [
         {
             'title': 'All',
@@ -38,7 +37,6 @@ def home(request):
         posts = Post.objects.all()
     else:
         posts = Category.objects.filter(name=category).first().post_set.all()
-
 
     context = {
         'posts': posts,
