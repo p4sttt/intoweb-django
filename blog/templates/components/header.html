@@ -1,25 +1,27 @@
 <header
-class="py-6 w-full bg-stone-950 bg-opacity-50 border-b backdrop-blur-lg border-white border-opacity-10 px-4 fixed top-0 z-[999]"
+  class="py-6 w-full bg-stone-950 bg-opacity-50 border-b backdrop-blur-lg border-white border-opacity-10 px-4 fixed top-0 z-[999]"
 >
-<div
-  class="container max-w-4xl flex flex-row justify-between mx-auto h-full items-end"
->
-  <div class="flex flex-row gap-6 items-end">
-    <a
-      href="{% url 'blog/feed' %}"
-      class="text-neutral-200 text-xl font-semibold uppercase leading-normal"
-    >
-      !NTOWEB
-    </a>
-    <nav
-      class="flex flex-row gap-3 text-gray-500 text-md font-normal leading-normal trainsition-color"
-    >
-      <a href="{% url 'blog/feed' %}" class="hover:text-gray-700">Feed</a>
-      <a href="{% url 'blog/about' %}" class="hover:text-gray-700"
-        >About</a
+  <div
+    class="container max-w-4xl flex flex-row justify-between mx-auto h-full items-end"
+  >
+    <div class="flex flex-row gap-6 items-end">
+      <a
+        href="{% url 'blog/feed' %}"
+        class="text-neutral-200 text-xl font-semibold uppercase leading-normal"
       >
-    </nav>
+        !NTOWEB
+      </a>
+      <nav
+        class="flex flex-row gap-3 text-gray-500 text-md font-normal leading-normal trainsition-color"
+      >
+        <a href="{% url 'blog/feed' %}" class="hover:text-gray-700">Feed</a>
+        <a href="{% url 'blog/about' %}" class="hover:text-gray-700">About</a>
+      </nav>
+    </div>
+    {% if user.is_authenticated %}
+    <a href="#">{{ user }}</a>
+    {% else %}
+    <a class="text-gray-300" href="{% url 'user/login' %}">Log in</a>
+    {% endif %}
   </div>
-  <a class="text-gray-300" href="{% url 'user/login' %}">Log in</a>
-</div>
 </header>

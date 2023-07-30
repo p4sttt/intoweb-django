@@ -1,4 +1,56 @@
 {% extends "blog/base.html" %} {% block content %}
-<h1>login page</h1>
-<a href="{% url 'user/register' %}">register</a>
+<form method="POST" class="w-full mx-auto max-w-xs flex flex-col gap-6">
+  <h1 class="text-2xl font-semibold">Welcome back</h1>
+  {% csrf_token %}
+  <fieldset class="flex flex-col gap-4">
+    <label class="flex flex-col gap-1">
+      Username
+      <input
+        type="text"
+        name="username"
+        maxlength="150"
+        autofocus
+        required
+        autocomplete="username"
+        class="w-full p-2 bg-zinc-900 rounded-xl border border-neutral-800"
+      />
+      <small class="text-neutral-500">
+        Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+      </small>
+    </label>
+    <label>
+      Password
+      <input
+        type="password"
+        name="password"
+        required
+        autocomplete="current-password"
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 hover:border-neutral-700 focus:border-neutral-700 active:border-neutral-700"
+      />
+      <small class="text-neutral-500">
+        <ul>
+          <li>
+            Your password can’t be too similar to your other personal
+            information.
+          </li>
+          <li>Your password must contain at least 8 characters.</li>
+          <li>Your password can’t be a commonly used password.</li>
+          <li>Your password can’t be entirely numeric.</li>
+        </ul>
+      </small>
+    </label>
+  </fieldset>
+  <div class="flex flex-col gap-1">
+    <button
+      type="submit"
+      class="px-8 py-2 rounded-xl text-neutral-950 text-base font-semibold bg-slate-400"
+    >
+      Login
+    </button>
+    <small>
+      Need An Account?
+      <a class="" href="{% url 'user/register' %}"> Sing Up Now </a>
+    </small>
+  </div>
+</form>
 {% endblock content %}

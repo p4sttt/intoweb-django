@@ -35,25 +35,13 @@
   background-color: #48525a;
 }
 
+input:focus,
+input:active,
+input:focus-visible {
+  outline: none;
+}
+
 .feed-grid {
   grid-template-columns: 256px 1fr;
   gap: 24px;
-}
-
-input {
-  display: flex;
-  padding: 1rem;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 1rem;
-  border: 1px solid #212428;
-  background: #191c1f;
-}
-
-label {
-  color: #ccc;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 }
