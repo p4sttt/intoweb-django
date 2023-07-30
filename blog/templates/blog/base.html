@@ -21,48 +21,29 @@
     <title>INTOWEB</title>
     {% endif %}
   </head>
-  <body
-    class="overflow-x-hidden text-neutral-200 bg-neutral-950 w-screen"
-  >
-    <!-- HEADER -->
-    <header
-      class="py-6 w-full bg-stone-950 bg-opacity-50 border-b backdrop-blur-lg border-white border-opacity-10 px-4 fixed top-0 z-[999]"
-    >
-      <div
-        class="container max-w-4xl flex flex-row justify-between mx-auto h-full items-end"
-      >
-        <div class="flex flex-row gap-6 items-end">
-          <a
-            href="{% url 'blog/feed' %}"
-            class="text-neutral-200 text-xl font-semibold uppercase leading-normal"
-          >
-            !NTOWEB
-          </a>
-          <nav
-            class="flex flex-row gap-3 text-gray-500 text-md font-normal leading-normal trainsition-color"
-          >
-            <a href="{% url 'blog/feed' %}" class="hover:text-gray-700">Feed</a>
-            <a href="{% url 'blog/about' %}" class="hover:text-gray-700"
-              >About</a
-            >
-          </nav>
+  <body class="overflow-x-hidden text-neutral-200 bg-neutral-950">
+    <div class="w-screen flex flex-col h-screen justify-between">
+      <!-- HEADER -->
+      {% include 'components/header.html' %}
+
+      <!-- MAIN CONTENT -->
+      <main class="px-4 pb-8 mb-auto">
+        <div class="container max-w-4xl mx-auto mt-24 h-full">
+          {% block content %} {% endblock %}
         </div>
-        <a class="text-gray-300" href="{% url 'user/login' %}">Log in</a>
-      </div>
-    </header>
+      </main>
 
-    <!-- MAIN CONTENT -->
-    <main class="px-4 pb-8">
-      <div class="container max-w-4xl mx-auto mt-24 h-full">
-        {% block content %} {% endblock %}
-      </div>
-    </main>
+      <!-- FOOTER -->
+      {% include 'components/footer.html' %}
 
-    <!-- FOOTER -->
-    <footer class="w-full py-4 absolute">
-      <p class="text-center text-gray-600 text-md font-normal leading-normal">
-        INTOWEB © 2022-2023
-      </p>
-    </footer>
+      <!-- ALERT WINDOW -->
+      <div class="flex flex-col-reverse gap-3 left-6 bottom-6 fixed">
+        {% if messages %} {% for message in messages %}
+        <div class="p-6 bg-zinc-900 rounded-2xl border border-neutral-700">
+          <p class="text-stone-300 text-md font-normal">{{ message }}</p>
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+    </div>
   </body>
 </html>
