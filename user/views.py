@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .forms import UserRegisterForm
-
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == 'POST':
@@ -48,3 +48,14 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('blog/feed')
+
+@login_required
+def profile(request):
+    user = request.user
+    user_posts = user.post_set.all()
+    context={
+        'posts': user_posts,
+        'user': user
+    }
+
+    return render(request, 'user/profile.html', context)

@@ -30,15 +30,7 @@
     {% if posts %}
     <h1 class="text-2xl font-semibold">Recent posts</h1>
     <div class="flex flex-col gap-2 mt-4">
-      {% for post in posts %}
-      <article
-        class="py-4 px-6 bg-[#212428] rounded-lg flex-col justify-start items-start gap-2 inline-flex"
-      >
-        <h1 class="text-xl font-semibold">{{ post.title }}</h1>
-        <p class="text-sm opacity-50">{{ post.text }}</p>
-        <p class="text-end w-full mt-2 opacity-80">{{ post.author }}</p>
-      </article>
-      {% endfor %}
+      {% for post in posts %} {% include 'components/article.html' %} {% endfor %}
     </div>
     {% else %}
     <div class="w-full h-full flex flex-col gap-1 items-center justify-center">

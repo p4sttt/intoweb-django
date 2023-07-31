@@ -1,0 +1,38 @@
+{% extends "blog/base.html" %} {% block content %}
+<div class="max-w-xl mx-auto flex flex-col gap-8">
+  <div class="flex flex-col w-full gap-6">
+    <img
+      src="{{ user.profile.banner.url }}"
+      alt="{{ user.username }} banner image"
+      class="rounded-2xl w-full h-[200px] object-cover"
+    />
+    <div class="flex inline-flex gap-4">
+      <img
+        src="{{ user.profile.image.url }}"
+        alt="{{ user.username }} avatar image"
+        class="w-20 h-20"
+      />
+      <div class="h-full w-fit py-1 flex flex-col itemse-start justify-start">
+        <h1 class="text-neutral-200 text-xl font-medium leading-normal">
+          {{ user.username }}
+        </h1>
+        <p class="text-gray-500 text-base font-normal leading-tight">
+          {{ user.profile.status }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <h1 class="text-neutral-200 text-xl font-medium leading-normal">About</h1>
+    <p class="text-gray-500 text-base font-normal leading-tight">
+      {{ user.profile.about }}
+    </p>
+  </div>
+  {% if posts %}
+  <div class="flex flex-col gap-2">
+    <h1 class="text-neutral-200 text-xl font-medium leading-normal">Posts</h1>
+    {% for post in posts %} {% include 'components/article.html' %} {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}

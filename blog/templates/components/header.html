@@ -12,14 +12,34 @@
         !NTOWEB
       </a>
       <nav
-        class="flex flex-row gap-3 text-gray-500 text-md font-normal leading-normal trainsition-color"
+        class="flex flex-row gap-3 text-gray-500 text-md font-normal leading-normal"
       >
-        <a href="{% url 'blog/feed' %}" class="hover:text-gray-700">Feed</a>
-        <a href="{% url 'blog/about' %}" class="hover:text-gray-700">About</a>
+        <a
+          href="{% url 'blog/feed' %}"
+          class="hover:text-gray-400 transition-colors"
+        >
+          Feed
+        </a>
+        <a
+          href="{% url 'blog/about' %}"
+          class="hover:text-gray-400 transition-colors"
+        >
+          About
+        </a>
       </nav>
     </div>
     {% if user.is_authenticated %}
-    <a href="#">{{ user }}</a>
+    <a
+      href="{% url 'user/profile' %}"
+      class="flex-row-reverse flex gap-4 items-center justify-start p-1 pl-2 rounded-full bg-transperent hover:bg-[#212428] trainsition-color duration-100"
+    >
+      <img
+        src="{{ user.profile.image.url }}"
+        alt="{{ user }} avatar image"
+        class="w-8 h-8"
+      />
+      <p>{{ user }}</p>
+    </a>
     {% else %}
     <a class="text-gray-300" href="{% url 'user/login' %}">Log in</a>
     {% endif %}
