@@ -13,7 +13,8 @@ def register(request):
         email = request.POST['email']
         password = request.POST['password']
 
-        User.objects.create_user(username=username, email=email, password=password)
+        new_user = User.objects.create_user(username=username, email=email, password=password)
+        auth_login(request, new_user)
         messages.success(request, 'Account was successfully created')
         return redirect('blog/feed')
 
@@ -52,7 +53,8 @@ def profile(request):
     user_posts = user.post_set.all()
     context = {
         'posts': user_posts,
-        'user': user
+        'user': user,
+        'title': 'Profile'
     }
 
     return render(request, 'user/profile.html', context)
@@ -65,6 +67,7 @@ def another_user_profile(request, username):
     user_posts = user.post_set.all()
     context = {
         'posts': user_posts,
-        'user': user
+        'user': user,
+        'title': user
     }
     return render(request, 'user/profile.html', context)

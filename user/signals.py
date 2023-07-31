@@ -9,3 +9,4 @@ def create_user_profile(sender, instance, created, **kwargs):
   if created:
       user_profile = Profile(user=instance, status='null')
       user_profile.save()
+
