@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from .forms import UserRegisterForm
 
 def register(request):
     if request.method == 'POST':
@@ -53,9 +54,21 @@ def logout(request):
 def profile(request):
     user = request.user
     user_posts = user.post_set.all()
-    context={
+    context = {
         'posts': user_posts,
         'user': user
     }
 
+    return render(request, 'user/profile.html', context)
+
+def another_user_profile(request, username):
+    if username == request.user.username:
+        return redirect('user/profile')
+
+    user = User.objects.filter(username=username).first()
+    user_posts = user.post_set.all()
+    context = {
+        'posts': user_posts,
+        'user': user
+    }
     return render(request, 'user/profile.html', context)

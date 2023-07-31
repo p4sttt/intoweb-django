@@ -3,5 +3,10 @@
 >
   <h1 class="text-xl font-semibold">{{ post.title }}</h1>
   <p class="text-sm opacity-50">{{ post.text }}</p>
-  <p class="text-end w-full mt-2 opacity-80">{{ post.author }}</p>
+  <a
+    class="text-end w-full mt-2 opacity-80"
+    href="{% url 'user/profile' %}{{ post.author }}"
+  >
+    {{ post.author }}
+  </a>
 </article>
