@@ -4,24 +4,20 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import Profile
 from .forms import UserRegisterForm
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
 
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Account successfully created')
-            return redirect('blog/feed')
-        else:
-            messages.error(request, 'Account registration error')
-
-    else:
-        form = UserRegisterForm()
+        User.objects.create_user(username=username, email=email, password=password)
+        messages.success(request, 'Account was successfully created')
+        return redirect('blog/feed')
 
     context = {
-        'form': form,
         'title': 'Register'
     }
 
