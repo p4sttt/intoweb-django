@@ -1,0 +1,85 @@
+{% extends "blog/base.html" %} {% block content %}
+<form
+  method="POST"
+  enctype="multipart/form-data"
+  class="w-full mx-auto max-w-xs flex flex-col gap-6 pt-6"
+>
+  <h1 class="text-2xl font-semibold">Edit profile</h1>
+  {% csrf_token %}
+  <fieldset class="flex flex-col gap-4">
+    <label class="flex flex-col gap-1">
+      Username
+      <input
+        value="{{ request.user }}"
+        type="text"
+        name="username"
+        maxlength="150"
+        autofocus
+        required
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 hover:border-neutral-700 focus:border-neutral-700 active:border-neutral-700"
+      />
+      <small class="text-neutral-500">
+        Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+      </small>
+    </label>
+    <label class="flex flex-col gap-1">
+      Email
+      <input
+        disabled
+        value="{{ request.user.email }}"
+        type="email"
+        name="email"
+        maxlength="320"
+        required
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 cursor-not-allowed text-neutral-400"
+      />
+    </label>
+    <label class="flex flex-col gap-1">
+      About
+      <textarea
+        name="about"
+        rows="4"
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 hover:border-neutral-700 focus:border-neutral-700 active:border-neutral-700"
+      >
+{{ request.user.profile.about }}</textarea
+      >
+      <small class="text-neutral-500">
+        Tell us about yourself in more than a few sentences
+      </small>
+    </label>
+    <label class="flex flex-col gap-1">
+      Status
+      <input
+        type="text"
+        name="status"
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 hover:border-neutral-700 focus:border-neutral-700 active:border-neutral-700"
+      />
+      <small class="text-neutral-500">
+        You will see the status on your profile page under the name
+      </small>
+    </label>
+    <label class="flex flex-col gap-1">
+      Profile picture
+      <input
+        type="file"
+        name="profile-picture"
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 cursor-pointer"
+      />
+    </label>
+    <label class="flex flex-col gap-1">
+      Header picture
+      <input
+        type="file"
+        name="header-picture"
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 cursor-pointer"
+      />
+    </label>
+  </fieldset>
+  <button
+    type="submit"
+    class="px-8 py-2 rounded-xl border-2 border-slate-500 justify-center items-center inline-flex text-stone-300 text-base font-semibold w-full"
+  >
+    Update
+  </button>
+</form>
+{% endblock %}

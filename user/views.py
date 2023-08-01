@@ -7,13 +7,15 @@ from django.contrib.auth.models import User
 from .models import Profile
 from .forms import UserRegisterForm
 
+
 def register(request):
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
 
-        new_user = User.objects.create_user(username=username, email=email, password=password)
+        new_user = User.objects.create_user(
+            username=username, email=email, password=password)
         auth_login(request, new_user)
         messages.success(request, 'Account was successfully created')
         return redirect('blog/feed')
@@ -34,8 +36,8 @@ def login(request):
             auth_login(request, user)
             return redirect('blog/feed')
         else:
-            messages.error(
-                'User registration error, check password or username')
+            messages.error(request,
+                           'User registration error, check password or username')
 
     context = {
         'title': 'Login'
@@ -46,6 +48,7 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('blog/feed')
+
 
 @login_required
 def profile(request):
@@ -58,6 +61,32 @@ def profile(request):
     }
 
     return render(request, 'user/profile.html', context)
+
+
+def edit_profile(request):
+    if request.method == 'POST':
+        user = request.user
+        user_profile = Profile.objects.filter(user=user).first()
+        if 'profile-picture' in request.FILES:
+            user_profile.image = request.FILES['profile-picture']
+        if 'header-picture' in request.FILES:
+            user_profile.banner = request.FILES['header-picture']
+        if 'about' in request.POST:
+            user_profile.about = request.POST['about']
+        if 'status' in request.POST:
+            user_profile.status = request.POST['status']
+        if 'username' in request.POST:
+            user.username = request.POST['username']
+
+        user.save()
+        user_profile.save()
+
+    context = {
+        'title': 'Edit profile'
+    }
+
+    return render(request, 'user/edit_profile.html', context)
+
 
 def another_user_profile(request, username):
     if username == request.user.username:

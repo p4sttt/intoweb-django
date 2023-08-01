@@ -1,18 +1,20 @@
-{% extends "blog/base.html" %} {% block content %}
-<div class="max-w-xl mx-auto flex flex-col gap-8">
+{% extends "blog/base.html" %} {% load static %} {% block content %}
+<div class="max-w-xl mx-auto flex flex-col gap-8 pt-6">
   <div class="flex flex-col w-full gap-6">
     <img
       src="{{ user.profile.banner.url }}"
       alt="{{ user.username }} banner image"
       class="rounded-2xl w-full h-[200px] object-cover"
     />
-    <div class="flex inline-flex gap-4">
+    <div class="justify-start items-center gap-4 inline-flex w-full">
       <img
         src="{{ user.profile.image.url }}"
         alt="{{ user.username }} avatar image"
-        class="w-20 h-20"
+        class="w-20 h-20 rounded-full"
       />
-      <div class="h-full w-fit py-1 flex flex-col itemse-start justify-start">
+      <div
+        class="self-stretch w-full py-1 flex-col justify-start items-start gap-1 inline-flex h-full"
+      >
         <h1 class="text-neutral-200 text-xl font-medium leading-normal">
           {{ user.username }}
         </h1>
@@ -20,6 +22,17 @@
           {{ user.profile.status }}
         </p>
       </div>
+      {% if request.user == user %}
+      <a
+        href="{% url 'user/edit_profile' %}"
+        class="p-2 bg-zinc-900 rounded-full justify-center items-center flex"
+      >
+        <img
+          src="{% static 'user/icons/edit-outline.svg' %}"
+          alt="edit-outline-icon"
+        />
+      </a>
+      {% endif %}
     </div>
   </div>
   {% if user.profile.about %}

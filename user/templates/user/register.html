@@ -1,5 +1,9 @@
 {% extends "blog/base.html" %} {% block content %}
-<form method="POST" class="w-full mx-auto max-w-xs flex flex-col gap-6">
+<form
+  method="POST"
+  class="w-full mx-auto max-w-xs flex flex-col gap-6 pt-6"
+  autocomplete="off"
+>
   <h1 class="text-2xl font-semibold">Join Today</h1>
   {% csrf_token %}
   <fieldset class="flex flex-col gap-4">
@@ -11,8 +15,7 @@
         maxlength="150"
         autofocus
         required
-        autocomplete="username"
-        class="w-full p-2 bg-zinc-900 rounded-xl border border-neutral-800"
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 hover:border-neutral-700 focus:border-neutral-700 active:border-neutral-700"
       />
       <small class="text-neutral-500">
         Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
@@ -25,7 +28,7 @@
         name="email"
         maxlength="320"
         required
-        class="w-full p-2 bg-zinc-900 rounded-xl border border-neutral-800"
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 hover:border-neutral-700 focus:border-neutral-700 active:border-neutral-700"
       />
     </label>
     <label>
@@ -34,7 +37,6 @@
         type="password"
         name="password"
         required
-        autocomplete="current-password"
         class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 hover:border-neutral-700 focus:border-neutral-700 active:border-neutral-700"
       />
       <small class="text-neutral-500">
