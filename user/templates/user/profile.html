@@ -48,5 +48,11 @@
     {% for post in posts %} {% include 'components/article.html' %} {% endfor %}
   </div>
   {% endif %}
+  <a
+    href="{% url 'user/logout' %}"
+    class="px-8 py-2 rounded-full border border-red-700 text-red-700 text-base font-semibold justify-center items-center inline-flex;"
+  >
+    Log out
+  </a>
 </div>
 {% endblock content %}
