@@ -14,7 +14,7 @@ class Post(models.Model):
     text = models.TextField(max_length=250)
     posted_date = models.DateField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    tag = models.ManyToManyField(Category)
+    categories = models.ManyToManyField(Category, blank=True)
 
     def __str__(self):
         return self.title

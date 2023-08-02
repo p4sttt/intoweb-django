@@ -7,6 +7,5 @@ from .models import Profile
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        print('create a new profile')
         user_profile = Profile(user=instance, status='null')
         user_profile.save()

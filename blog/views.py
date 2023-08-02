@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.templatetags.static import static
 from .models import Post, Category
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.contrib import messages
 
 
 def feed(request):
@@ -53,3 +56,30 @@ def about(request):
     }
 
     return render(request, 'blog/about.html', context)
+
+
+@login_required
+def create_post(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        text = request.POST['text']
+        categories = request.POST.getlist('category')
+
+        categories_models_list = [Category.objects.filter(
+            name=category_name).first() for category_name in categories]
+
+        created_post = Post(author=request.user, title=title, text=text)
+        created_post.save()
+        created_post.categories.add(*categories_models_list)
+
+        messages.success(request, "Post was successfully published")
+
+        return redirect('blog/feed')
+
+    categories = Category.objects.filter(~Q(name='default'))
+    context = {
+        'title': 'Create post',
+        'categories': categories
+    }
+
+    return render(request, 'blog/create_post.html', context)

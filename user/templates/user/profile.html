@@ -47,12 +47,13 @@
     <h1 class="text-neutral-200 text-xl font-medium leading-normal">Posts</h1>
     {% for post in posts %} {% include 'components/article.html' %} {% endfor %}
   </div>
-  {% endif %}
+  {% endif %} {% if request.user == user %}
   <a
     href="{% url 'user/logout' %}"
-    class="px-8 py-2 rounded-full border border-red-700 text-red-700 text-base font-semibold justify-center items-center inline-flex;"
+    class="px-8 py-2 rounded-full border border-red-700 text-red-700 text-base font-semibold justify-center items-center inline-flex"
   >
     Log out
   </a>
+  {% endif %}
 </div>
 {% endblock content %}

@@ -16,7 +16,8 @@
       {{ category.title }}
     </a>
     {% endfor %}
-    <button
+    <a
+      href="{% url 'blog/feed/new' %}"
       class="pt-5 flex flex-row gap-2 border-t border-neutral-800 justify-start items-center w-full font-medium text-slate-400 opacity-80 hover:opacity-100"
     >
       <img
@@ -24,7 +25,7 @@
         alt="plus-outline-icon"
       />
       Create post
-    </button>
+    </a>
   </div>
   <div>
     {% if posts %}

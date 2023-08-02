@@ -37,7 +37,10 @@
 
 input:focus,
 input:active,
-input:focus-visible {
+input:focus-visible,
+textarea:focus,
+textarea:active,
+textarea:focus-visible {
   outline: none;
 }
 

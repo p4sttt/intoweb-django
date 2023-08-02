@@ -1,0 +1,54 @@
+{% extends 'blog/base.html' %} {% block content %}
+<form method="POST" class="w-full mx-auto max-w-xs flex flex-col gap-6 pt-6">
+  <h1 class="text-2xl font-semibold">Create a new post</h1>
+  {% csrf_token %}
+  <fieldset class="flex flex-col gap-4">
+    <label class="flex flex-col gap-1">
+      Title
+      <input
+        type="text"
+        name="title"
+        required
+        autofocus
+        maxlength="50"
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 hover:border-neutral-700 focus:border-neutral-700 active:border-neutral-700"
+      />
+      <small class="text-neutral-500">
+        Required. 50 characters or fewer.
+      </small>
+    </label>
+    <label class="flex flex-col gap-1">
+      Text
+      <textarea
+        name="text"
+        cols="30"
+        rows="5"
+        required
+        class="w-full p-2 px-3 bg-zinc-900 rounded-xl border border-neutral-800 hover:border-neutral-700 focus:border-neutral-700 active:border-neutral-700"
+      ></textarea>
+      <small class="text-neutral-500">
+        Required. 250 characters or fewer.
+      </small>
+    </label>
+    <label class="flex flex-col gap-1">
+      Choose categories {% for category in categories %}
+      <label class="flex flex-row gap-2 items-center justify-start">
+        <input
+          type="checkbox"
+          name="category"
+          class="w-4 h-4"
+          value="{{ category }}"
+        />
+        {{ category }}
+      </label>
+      {% endfor %}
+    </label>
+  </fieldset>
+  <button
+    type="submit"
+    class="px-8 py-2 rounded-xl text-neutral-950 text-base font-semibold bg-slate-400"
+  >
+    Publish
+  </button>
+</form>
+{% endblock %}
